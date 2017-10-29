@@ -1,0 +1,27 @@
+@charset "UTF-8";
+.mt150 {
+  margin-top: 150px;
+}
+
+.lt_panel h4 {
+  text-align: center;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+}
+
+.lt_panel .table td {
+  text-align: center;
+  vertical-align: middle;
+}
