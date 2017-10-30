@@ -21,7 +21,7 @@ a:link, a:visited, a:hover, a:active {
   text-decoration: none;
 }
 
-.lt_panel .table td {
+.lt_main .table td {
   text-align: center;
   vertical-align: middle;
 }
@@ -76,7 +76,7 @@ a:link, a:visited, a:hover, a:active {
 }
 .lt_aside .nav a.now{
   background-color: #1d1f21;
-  border-left: #367fa9;
+  border-left-color: #367fa9;
   color: #fff;
 }
 .lt_main{
