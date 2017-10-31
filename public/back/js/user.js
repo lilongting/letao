@@ -3,7 +3,7 @@
  */
 $(function () {
   var currentPage = 1;
-  var pageSize = 16;
+  var pageSize = 8;
 
   function render() {
     $.ajax({
@@ -14,7 +14,7 @@ $(function () {
         pageSize: pageSize
       },
       success: function (data) {
-        console.log(data);
+        // console.log(data);
         var html = template("tpl", data)
         $("tbody").html(html);
         //分页
@@ -31,5 +31,31 @@ $(function () {
       }
     });
   }
+
   render();
+  //点击启用或禁用
+  //因为按钮动态创建出来的，需要委托事件
+  $("tbody").on("click", ".btn", function () {
+    $("#userModal").modal("show");
+    var id = $(this).parent().data("id")
+    var isDelete = $(this).parent().data("isDelete");
+    isDelete = isDelete === 1 ? 0 : 1;
+    //禁用或启用此用户 .off()清除之前的事件避免重复事件
+    $(".btn_confirm").off().on("click",function () {
+      $.ajax({
+        type:"post",
+        url:"/user/updateUser",
+        data:{
+          id:id,
+          isDelete:isDelete
+        },
+        success:function (data) {
+          if(data.success){
+            $("#userModal").modal("hide");
+            render();
+          }
+        }
+      })
+    })
+  })
 });
