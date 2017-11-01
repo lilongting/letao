@@ -1,0 +1,22 @@
+@charset "UTF-8";
+.lt_category_l{
+  width: 90px;
+  height: 100%;
+  float: left;
+  position: relative;
+}
+.lt_category_l li{
+  height: 50px;
+  line-height: 50px;
+  border-right: 1px solid lightblue;
+  border-bottom: 1px solid lightblue;
+  text-align: center;
+  background-color: lightcyan;
+}
+.lt_category_l li.now{
+  background-color: #fff;
+  border-right: none;
+}
+.lt_category_l a{
+  color: #fff;
+}
