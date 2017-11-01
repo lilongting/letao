@@ -51,14 +51,23 @@ $(function () {
   $(".dropdown-menu").on("click", "a", function () {
     $(".dropdown-text").text($(this).text());
     $("#brandId").val($(this).data("id"));
-    // $form.data("bootstrapValidator").updateStatus("brandId", "VALID");
+    $form.data("bootstrapValidator").updateStatus("brandId", "VALID");
   });
   //初始化产品图片上传
   $("#fileupload").fileupload({
     dataType: "json",
     done: function (e, data) {
       //上传成功，将图片添加到img_box中
+      console.log(data.result);
       $(".img_box").append('<img src="' + data.result.picAddr + '" width="100" height="100">');
+      //存贮上传图片
+      imgArray.push(data.result);
+      //判断数组长度
+      if (imgArray.length === 3) {
+        $form.data("bootstrapValidator").updateStatus("productLogo", "VALID");
+      } else {
+        $form.data("bootstrapValidator").updateStatus("productLogo", "INVALID");
+      }
     }
   });
   var $form = $("#form");
@@ -129,6 +138,39 @@ $(function () {
           }
         }
       },
+      productLogo: {
+        validators: {
+          notEmpty: {
+            message: "请上传三张商品图片"
+          }
+        }
+      },
     }
   });
+  var imgArray = [];
+  $form.on("success.form.bv", function (e) {
+    e.preventDefault();
+    var param = $form.serialize();
+    param += "&picName1=" + imgArray[0].picName + "&picAddr1=" + imgArray[0].picAddr;
+    param += "&picName2=" + imgArray[1].picName + "&picAddr2=" + imgArray[1].picAddr;
+    param += "&picName3=" + imgArray[2].picName + "&picAddr3=" + imgArray[2].picAddr;
+    $.ajax({
+      type: "post",
+      url: "/product/addProduct",
+      data: param,
+      success: function (data) {
+        if (data.success) {
+          $("#addModal").modal("hide");
+          currentPage = 1;
+          render();
+          //重置表单样式
+          $form[0].reset();
+          $form.data("bootstrapValidator").resetForm();
+          $(".dropdown-text").text("请选择二级分类");
+          $(".img_box img").remove();
+          imgArray = [];
+        }
+      }
+    })
+  })
 });
