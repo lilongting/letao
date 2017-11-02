@@ -2,7 +2,7 @@
  * Created by msi on 2017/11/2.
  */
 var tools = {
-  getPagramObj: function () {
+  getParamObj: function () {
     // location.search
     var obj = {};
     var search = location.search;
@@ -10,12 +10,13 @@ var tools = {
     var arr = search.split("&");
     for (var i = 0; i < arr.length; i++) {
       var key = arr[i].split("=")[0];
-      var value = arr[i].split("=")[1];
+      // decodeURI()转换成文字
+      var value = decodeURI(arr[i].split("=")[1]);
       obj[key] = value;
     }
     return obj;
   },
   getParam:function (key) {
-    return this.getPagramObj()[key];
+    return this.getParamObj()[key];
   }
 }

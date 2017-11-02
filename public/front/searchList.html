@@ -36,7 +36,7 @@
       <!--商品-->
         <div class="lt_product mui-clearfix">
           <div class="loading"></div>
-
+          <!--坑-->
         </div>
       </div>
     </div>
@@ -73,14 +73,25 @@
 </div>
 
 <script type="text/html" id="tpl">
-  {{if arr.length===0}}
+  {{if data.length===0}}
   <p>没有搜索记录</p>
   {{/if}}
-
+  {{each data v i}}
+  <a href="#" class="item">
+    <img src="{{v.pic[0].picAddr}}" alt="">
+    <p class="mui-ellipsis-2">{{v.proName}}</p>
+    <p>
+      <span>&yen;{{v.price}}</span>
+      <span>&yen;{{v.oldPrice}}</span>
+    </p>
+    <button class="mui-btn-blue">立即购买</button>
+  </a>
+  {{/each}}
 </script>
 <script src="lib/mui/js/mui.min.js"></script>
 <script src="lib/zepto/zepto.min.js"></script>
 <script src="lib/artTemplate/template-web.js"></script>
+<script src="js/common.js"></script>
 <script src="js/searchList.js"></script>
 </body>
 </html>
