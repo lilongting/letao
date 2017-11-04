@@ -28,11 +28,14 @@ $(".lt_history").on("click", ".icon_empty", function () {
 //删除功能
 $(".lt_history").on("click", ".fa-close", function () {
   var btnArray = ["是", "否"];
+  //吧this存起来，
+  var $this = $(this)
   mui.confirm("你确定删除这条记录", "提示", btnArray, function (data) {
     // console.log(data);
     if (data.index == 0) {
       var arr = getHistory();
-      var index = $(this).data("index");
+      //如果不在外面存储this，在此处function已改变this指向，找不到this（undefined 转换数字是0），所以在删除最后一项的时候，删除的是第一项
+      var index = $this.data("index");
       arr.splice(index, 1);
       localStorage.setItem("lt_search_history", JSON.stringify(arr));
       render();

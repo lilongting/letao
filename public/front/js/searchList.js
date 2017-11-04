@@ -38,7 +38,7 @@ $(function () {
   $(".search_btn").on("click", function () {
     //把所有的a的now样式清掉，同时，把两个排序也清掉
     $(".lt_sort a").removeClass("now");
-    $(".lt_sort span").removeClass("fa-angle -up").addClass("fa-angle-down");
+    $(".lt_sort span").removeClass("fa-angle-up").addClass("fa-angle-down");
     data.price = "";
     data.num = "";
     //获取用户输入内容
@@ -47,6 +47,7 @@ $(function () {
       mui.toast("请输入您要搜索的内容");
     }
     $(".lt_product").html('<div class="loading"></div>');
+    data.proName = key;
     render(data);
   });
 
