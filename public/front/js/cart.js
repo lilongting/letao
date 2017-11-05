@@ -2,6 +2,7 @@
  * Created by msi on 2017/11/4.
  */
 $(function () {
+  // tools.checkLogin(data);
   //添加下拉刷新
   mui.init({
     pullRefresh: {
@@ -16,12 +17,15 @@ $(function () {
             success: function (data) {
               console.log(data);
               setTimeout(function () {
-                console.log(data);
+                // console.log(data);
                 tools.checkLogin(data);
+                // setTimeout(function () {
+                //   $("#OA_task_2").html(template("tpl", {data: data}));
+                // },500)
                 $("#OA_task_2").html(template("tpl", {data: data}));
                 mui(".mui-scroll-wrapper").pullRefresh().endPulldownToRefresh();
               }, 1000);
-              
+
             }
           });
         }

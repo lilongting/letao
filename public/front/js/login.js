@@ -10,7 +10,6 @@ $(function () {
       mui.toast("请输入用户名");
       return false;
     }
-    ;
     if (!password) {
       mui.toast("请输入密码");
       return false;
@@ -27,7 +26,7 @@ $(function () {
         if (data.success) {
           //回调地址？ 如果search 有retUrl,就回调， 没有就跳转个人中心
           var search = location.search;
-          if (search.lastIndexOf("retUrl") > -1) {
+          if (search.indexOf("retUrl") > -1) {
             search = search.replace("?retUrl=","");
             location.href = search;
           }else {
